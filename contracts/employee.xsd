@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://hr.com/employee-service/ws"
+           targetNamespace="http://hr.com/employee-service/ws"
+           elementFormDefault="qualified">
+
+    <!-- Statut -->
+    <xs:simpleType name="EmployeeStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTIVE"/>
+            <xs:enumeration value="ON_LEAVE"/>
+            <xs:enumeration value="LEFT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Employé -->
+    <xs:complexType name="EmployeeInfo">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="matricule" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string" minOccurs="0"/>
+            <xs:element name="hireDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="status" type="tns:EmployeeStatusType"/>
+            <xs:element name="positionId" type="xs:long" minOccurs="0"/>
+            <xs:element name="departmentId" type="xs:long" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- getEmployeeById -->
+    <xs:element name="getEmployeeByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getEmployeeByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:EmployeeInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- getAllEmployees -->
+    <xs:element name="getAllEmployeesRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="getAllEmployeesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:EmployeeInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- createEmployee -->
+    <xs:element name="createEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:EmployeeInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:EmployeeInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- updateEmployee -->
+    <xs:element name="updateEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:EmployeeInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="tns:EmployeeInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- deleteEmployee -->
+    <xs:element name="deleteEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean"/>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
