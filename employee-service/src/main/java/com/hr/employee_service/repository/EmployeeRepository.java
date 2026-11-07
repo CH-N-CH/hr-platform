@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByMatricule(String matricule);
     boolean existsByEmail(String email);
+    boolean existsByMatricule(String matricule);
 }
